@@ -37,7 +37,7 @@
 #include "led_driver.h"
 #include "key.h"
 #include "lcd.h"
-
+#include "ST7735.h"
 
 #include "bsp_board.h"
 

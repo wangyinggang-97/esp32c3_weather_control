@@ -26,25 +26,34 @@
 #define EXAMPLE_CHASE_SPEED_MS      10
 
 //lcd_touch
-#define BLK_GPIO_PIN GPIO_NUM_32
-#define LCD_HOST  HSPI_HOST
+#define BLK_GPIO_PIN 10
+#define LCD_HOST  SPI2_HOST
 
-#define EXAMPLE_LCD_H_RES              240
-#define EXAMPLE_LCD_V_RES              240
+#define EXAMPLE_LCD_H_RES              80
+#define EXAMPLE_LCD_V_RES              120
+
+#define LCD_TASK_STACK_SIZE   (4 * 1024)
+#define LCD_TASK_PRIORITY     21
+
+/* blk端口定义 */
+#define BLK(x)          do { x ?                                      \
+                             gpio_set_level(BLK_GPIO_PIN, 1) :  \
+                             gpio_set_level(BLK_GPIO_PIN, 0); \
+                        } while(0)  /* LED翻转 */
 
 #define EXAMPLE_LCD_CMD_BITS           8
 #define EXAMPLE_LCD_PARAM_BITS         8
 
-#define EXAMPLE_LCD_PIXEL_CLOCK_HZ     (20 * 1000 * 1000)
+#define EXAMPLE_LCD_PIXEL_CLOCK_HZ     (10 * 1000 * 1000)
 #define EXAMPLE_LCD_BK_LIGHT_ON_LEVEL  1
 #define EXAMPLE_LCD_BK_LIGHT_OFF_LEVEL !EXAMPLE_LCD_BK_LIGHT_ON_LEVEL
-#define EXAMPLE_PIN_NUM_SCLK           14
-#define EXAMPLE_PIN_NUM_MOSI           15
+#define EXAMPLE_PIN_NUM_SCLK           0
+#define EXAMPLE_PIN_NUM_MOSI           1
 #define EXAMPLE_PIN_NUM_MISO           -1
-#define EXAMPLE_PIN_NUM_LCD_DC         27
-#define EXAMPLE_PIN_NUM_LCD_RST        33
-#define EXAMPLE_PIN_NUM_LCD_CS         5
-#define EXAMPLE_PIN_NUM_BK_LIGHT       32
+#define EXAMPLE_PIN_NUM_LCD_DC         2
+#define EXAMPLE_PIN_NUM_LCD_RST        7
+#define EXAMPLE_PIN_NUM_LCD_CS         3
+#define EXAMPLE_PIN_NUM_BK_LIGHT       10
 #define EXAMPLE_PIN_NUM_TOUCH_CS       4
 
 #define EXAMPLE_LVGL_TICK_PERIOD_MS    2

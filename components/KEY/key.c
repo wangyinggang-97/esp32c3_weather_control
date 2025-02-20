@@ -93,7 +93,7 @@ void Key_task(void *arg)
 	{
 		vTaskDelay(10 / portTICK_PERIOD_MS);
 	}
-	
+	vTaskDelete(NULL);
 }
 /*Function prototype End*******************************************************/
 
