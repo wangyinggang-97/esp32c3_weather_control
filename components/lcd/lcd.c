@@ -58,25 +58,32 @@ void st7735_lcd_init(void)
 	ESP_ERROR_CHECK(esp_lcd_panel_reset(panel_handle));
     ESP_ERROR_CHECK(esp_lcd_panel_init(panel_handle));
     // ESP_ERROR_CHECK(esp_lcd_panel_invert_color(panel_handle, true));
-	ESP_ERROR_CHECK(esp_lcd_panel_swap_xy(panel_handle, false));
-    ESP_ERROR_CHECK(esp_lcd_panel_mirror(panel_handle, true, false));
+	// ESP_ERROR_CHECK(esp_lcd_panel_swap_xy(panel_handle, false));
+    // ESP_ERROR_CHECK(esp_lcd_panel_mirror(panel_handle, true, false));
     // user can flush pre-defined pattern to the screen before we turn on the screen or backlight
     ESP_ERROR_CHECK(esp_lcd_panel_disp_on_off(panel_handle, true));
 
 	BLK_init();
 	ESP_LOGI(TAG, "blk init ok");
 	BLK(1);
-	// uint16_t red_color = 0xF800;  // RGB565 格式的红色
-    // esp_lcd_panel_draw_bitmap(panel_handle, 0, 0, EXAMPLE_LCD_H_RES, EXAMPLE_LCD_V_RES, &red_color);
+	uint16_t *background;
+
+	background = (uint16_t *)malloc(EXAMPLE_LCD_H_RES * EXAMPLE_LCD_V_RES); 
+
+	for(int i = 0; i < EXAMPLE_LCD_H_RES * EXAMPLE_LCD_V_RES; i++)
+	{
+		background[i] = COLOR_GREEN;
+	}
+    esp_lcd_panel_draw_bitmap(panel_handle, 0, 0, EXAMPLE_LCD_H_RES, EXAMPLE_LCD_V_RES, background);
 
 }
 
 
 void lcd_task(void *arg)
 {
-	// st7735_lcd_init();
-	st7735_init();
-	st7735_invert_color(1);
+	 st7735_lcd_init();
+	// st7735_init();
+	// st7735_rect(0,0,50,50,0xF800);
 	while (1)
 	{
 		vTaskDelay(10 / portTICK_PERIOD_MS);

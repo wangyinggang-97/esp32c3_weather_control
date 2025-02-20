@@ -29,8 +29,8 @@
 #define BLK_GPIO_PIN 10
 #define LCD_HOST  SPI2_HOST
 
-#define EXAMPLE_LCD_H_RES              80
-#define EXAMPLE_LCD_V_RES              120
+#define EXAMPLE_LCD_H_RES              128
+#define EXAMPLE_LCD_V_RES              160
 
 #define LCD_TASK_STACK_SIZE   (4 * 1024)
 #define LCD_TASK_PRIORITY     21
