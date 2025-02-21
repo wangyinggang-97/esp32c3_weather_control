@@ -1,9 +1,11 @@
 #include "main.h"
-
+#include "lvgl.h"
 
 void periodic_timer_callback(void* arg)
 {
-    button_ticks();
+    //button_ticks();
+	/* Tell LVGL how many milliseconds has elapsed */
+    lv_tick_inc(EXAMPLE_LVGL_TICK_PERIOD_MS);	
 }
 
 void esptimer_init(void)
